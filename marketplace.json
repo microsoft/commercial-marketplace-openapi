@@ -10,7 +10,10 @@
     "version": "2018-08-31",
     "title": "SaaS fulfillment APIs, version 2",
     "x-ms-code-generation-settings": {
-      "name": "SaaSClient"
+      "name": "MarketplaceClient",
+      "header": "MIT",
+      "internalConstructors": true,
+      "useDateTimeOffset": false
     },
     "description": "This spec details the APIs that enable partners to sell their SaaS applications in the AppSource marketplace and the Azure Marketplace. These APIs are a requirement for transactable SaaS offers on the AppSource and Azure Marketplace."
   },
@@ -50,6 +53,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -60,6 +64,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -83,7 +88,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SubscriptionSummary"
+                  "$ref": "#/components/schemas/ResolvedSubscription"
                 }
               }
             }
@@ -140,6 +145,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -150,6 +156,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -220,6 +227,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -230,6 +238,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -297,6 +306,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -307,6 +317,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -329,13 +340,14 @@
           "202": {
             "description": "The request to change plan and/or quantity has been accepted. The partner is expected to poll the Operation-Location to determine a success or failure.",
             "headers": {
-              "Operation-Location" : {
-                "schema":{
+              "Operation-Location": {
+                "x-ms-client-name": "OperationLocationUri",
+                "schema": {
                   "type": "string",
                   "format": "uri"
                 }
               }
-            } 
+            }
           },
           "400": {
             "description": "Bad request. Validation failures."
@@ -388,6 +400,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -398,6 +411,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -408,7 +422,16 @@
         ],
         "responses": {
           "202": {
-            "description": "The partner initiated a call to unsubscribe a SaaS subscription."
+            "description": "The partner initiated a call to unsubscribe a SaaS subscription.",
+            "headers": {
+              "Operation-Location": {
+                "x-ms-client-name": "OperationLocationUri",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
           },
           "400": {
             "description": "Delete on a subscription with Delete not in allowedCustomerOperations."
@@ -463,6 +486,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -473,6 +497,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -487,7 +512,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PlansResponse"
+                  "$ref": "#/components/schemas/SubscriptionPlans"
                 }
               }
             }
@@ -542,6 +567,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -552,6 +578,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -627,6 +654,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -637,6 +665,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -718,6 +747,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -728,6 +758,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -742,7 +773,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OperationType"
+                  "$ref": "#/components/schemas/Operation"
                 }
               }
             }
@@ -807,6 +838,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -817,6 +849,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -876,6 +909,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -886,6 +920,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -946,6 +981,7 @@
           {
             "in": "header",
             "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
             "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -956,6 +992,7 @@
           {
             "in": "header",
             "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
             "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
             "schema": {
               "type": "string",
@@ -1014,7 +1051,7 @@
         "enum": ["2018-08-31", "2018-09-15"],
         "default": "2018-08-31"
       },
-      "SubscriptionSummary": {
+      "ResolvedSubscription": {
         "description": "Summary of the subscription",
         "type": "object",
         "properties": {
@@ -1034,6 +1071,9 @@
           "quantity": {
             "type": "integer",
             "format": "int64"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/Subscription"
           }
         }
       },
@@ -1081,7 +1121,7 @@
             ],
             "x-ms-enum": {
               "name": "SubscriptionStatusEnum",
-              "modelAsString": true
+              "modelAsString": false
             }
           },
           "beneficiary": {
@@ -1122,7 +1162,11 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["Read", "Update", "Delete"]
+              "enum": ["Read", "Update", "Delete"],
+              "x-ms-enum": {
+                "name": "AllowedCustomerOperationsEnum",
+                "modelAsString": false
+              }
             }
           },
           "sessionId": {
@@ -1139,12 +1183,20 @@
           "sessionMode": {
             "type": "string",
             "description": "Dry Run indicates all transactions run as Test-Mode in the commerce stack",
-            "enum": ["None", "DryRun"]
+            "enum": ["None", "DryRun"],
+            "x-ms-enum": {
+              "name": "SessionModeEnum",
+              "modelAsString": false
+            }
           },
           "sandboxType": {
             "type": "string",
             "description": "Possible Values are None, Csp (Csp sandbox purchase)",
-            "enum": ["None", "Csp"]
+            "enum": ["None", "Csp"],
+            "x-ms-enum": {
+              "name": "SandboxTypeEnum",
+              "modelAsString": false
+            }
           }
         }
       },
@@ -1168,10 +1220,10 @@
           }
         }
       },
-      "PlansResponse": {
+      "SubscriptionPlans": {
         "type": "object",
         "properties": {
-          "subscriptions": {
+          "plans": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Plan"
@@ -1205,6 +1257,22 @@
           }
         }
       },
+      "FulfillmentInternalServerErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
       "UpdateOperation": {
         "type": "object",
         "properties": {
@@ -1217,17 +1285,26 @@
           },
           "status": {
             "type": "string",
-            "enum": ["Success", "Failure"]
+            "enum": ["Success", "Failure"],
+            "x-ms-enum": {
+              "name": "UpdateOperationStatusEnum",
+              "modelAsString": false
+            }
           }
         }
       },
       "OperationList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/OperationType"
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation"
+            }
+          }
         }
       },
-      "OperationType": {
+      "Operation": {
         "type": "object",
         "properties": {
           "id": {
@@ -1256,14 +1333,36 @@
             "format": "int32"
           },
           "action": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Unsubscribe",
+              "ChangePlan",
+              "ChangeQuantity",
+              "Suspend",
+              "Reinstate"
+            ],
+            "x-ms-enum": {
+              "name": "OperationActionEnum",
+              "modelAsString": false
+            }
           },
           "timeStamp": {
             "type": "string",
             "format": "date-time"
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "NotStarted",
+              "InProgress",
+              "Succeeded",
+              "Failed",
+              "Conflict"
+            ],
+            "x-ms-enum": {
+              "name": "OperationStatusEnum",
+              "modelAsString": false
+            }
           }
         }
       },
@@ -1320,7 +1419,11 @@
               "ResourceNotFound",
               "ResourceNotAuthorized",
               "InvalidDimension|BadArgument"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "UsageEventStatusEnum",
+              "modelAsString": false
+            }
           },
           "messageTime": {
             "description": "Time this message was created in UTC",
@@ -1349,96 +1452,92 @@
           "planId": {
             "type": "string",
             "description": "Plan associated with the purchased offer"
+          }
+        }
+      },
+      "UsageEventConflictResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
           },
-          "error": {
-            "$ref": "#/components/schemas/Error"
-          }
-        }
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "error": {
+          "additionalInfo": {
             "type": "object",
             "properties": {
-              "code": {
+              "usageEventId": {
+                "description": "Unique identifier associated with the usage event",
+                "type": "string",
+                "format": "uuid"
+              },
+              "status": {
+                "description": "Accepted|NotProcessed|Expired",
+                "type": "string",
+                "enum": ["Accepted", "NotProcessed", "Expired"]
+              },
+              "messageTime": {
+                "description": "Time this message was created in UTC",
+                "type": "string",
+                "format": "date-time"
+              },
+              "resourceId": {
+                "description": "Identifier of the resource against which usage is emitted",
+                "type": "string",
+                "format": "uuid"
+              },
+              "quantity": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "dimension": {
+                "description": "Dimension identifier",
                 "type": "string"
               },
-              "message": {
-                "type": "string"
+              "effectiveStartTime": {
+                "description": "Time in UTC when the usage event occurred",
+                "type": "string",
+                "format": "date-time"
               },
-              "target": {
-                "type": "string"
-              },
-              "details": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ErrorDetail"
-                }
-              },
-              "additionalInfo": {
-                "type": "object",
-                "properties": {
-                  "usageEventId": {
-                    "description": "Unique identifier associated with the usage event",
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "status": {
-                    "description": "Accepted|NotProcessed|Expired",
-                    "type": "string",
-                    "enum": ["Accepted", "NotProcessed", "Expired"]
-                  },
-                  "messageTime": {
-                    "description": "Time this message was created in UTC",
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "resourceId": {
-                    "description": "Identifier of the resource against which usage is emitted",
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "quantity": {
-                    "type": "integer",
-                    "format": "int64"
-                  },
-                  "dimension": {
-                    "description": "Dimension identifier",
-                    "type": "string"
-                  },
-                  "effectiveStartTime": {
-                    "description": "Time in UTC when the usage event occurred",
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "planId": {
-                    "description": "Plan associated with the purchased offer",
-                    "type": "string",
-                    "format": "uuid"
-                  }
-                }
+              "planId": {
+                "description": "Plan associated with the purchased offer",
+                "type": "string",
+                "format": "uuid"
               }
             }
           }
         }
       },
-      "ErrorDetail": {
+
+      "UsageEventBadRequestResponse": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "message": {
-                "type": "string"
-              },
-              "target": {
-                "type": "string"
-              }
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageEventBadRequestResponseDetail"
             }
+          }
+        }
+      },
+      "UsageEventBadRequestResponseDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
           }
         }
       }
