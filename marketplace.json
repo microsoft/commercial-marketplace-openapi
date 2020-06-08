@@ -1294,9 +1294,14 @@
         }
       },
       "OperationList": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Operation"
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Operation"
+            }
+          }
         }
       },
       "Operation": {
