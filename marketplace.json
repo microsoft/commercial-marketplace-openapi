@@ -934,7 +934,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BatchUsageEvent"
+                "$ref": "#/components/schemas/UsageEvent"
               }
             }
           }
