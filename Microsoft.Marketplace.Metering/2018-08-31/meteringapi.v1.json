@@ -191,7 +191,11 @@
           "resourceId": {
             "type": "string",
             "format": "uuid",
-            "description": "Subscription ID for the event"
+            "description": "Subscription ID for the event. Used with SaaS applications."
+          },
+          "resourceUri": {
+            "type": "string",
+            "description": "Resource URI for the managed app. Used with managed applications."
           },
           "quantity": {
             "type": "integer",
@@ -256,6 +260,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "resourceUri": {
+            "description": "Identifier of the managed app resource against which usage is emitted",
+            "type": "string"
+          },
           "quantity": {
             "description": "Number of units consumed",
             "type": "integer",
@@ -310,6 +318,10 @@
                 "description": "Identifier of the resource against which usage is emitted",
                 "type": "string",
                 "format": "uuid"
+              },
+              "resourceUri": {
+                "description": "Identifier of the managed app resource against which usage is emitted",
+                "type": "string"
               },
               "quantity": {
                 "type": "integer",
