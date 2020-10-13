@@ -191,11 +191,11 @@
           "resourceId": {
             "type": "string",
             "format": "uuid",
-            "description": "Subscription ID for the event. Used with SaaS applications."
+            "description": "subscriptionId property value for SaaS offer subscriptions; resourceUsageId property on the managed application resource for managed application offers. For managed applications, only use one of resourceId or resourceUri."
           },
           "resourceUri": {
             "type": "string",
-            "description": "Resource URI for the managed app. Used with managed applications."
+            "description": "Resource URI for the managed app. Used with managed applications. Only use resourceUri or resourceId, but never both."
           },
           "quantity": {
             "type": "integer",
