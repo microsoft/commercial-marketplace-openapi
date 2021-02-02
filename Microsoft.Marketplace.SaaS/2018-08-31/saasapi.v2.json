@@ -909,6 +909,10 @@
               }
             }
           },
+          "autoRenew": {
+            "type": "boolean",
+            "description": "Indicating whether the subscription will renew automatically."
+          },
           "isTest": {
             "type": "boolean",
             "description": "Indicating whether the current subscription is a test asset."
@@ -939,21 +943,29 @@
           "storeFront": {
             "type": "string"
           },
-          "sessionMode": {
-            "type": "string",
-            "description": "Dry Run indicates all transactions run as Test-Mode in the commerce stack",
-            "enum": ["None", "DryRun"],
-            "x-ms-enum": {
-              "name": "SessionModeEnum",
-              "modelAsString": false
-            }
-          },
           "sandboxType": {
             "type": "string",
             "description": "Possible Values are None, Csp (Csp sandbox purchase)",
             "enum": ["None", "Csp"],
             "x-ms-enum": {
               "name": "SandboxTypeEnum",
+              "modelAsString": false
+            }
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sessionMode": {
+            "type": "string",
+            "description": "Dry Run indicates all transactions run as Test-Mode in the commerce stack",
+            "enum": ["None", "DryRun"],
+            "x-ms-enum": {
+              "name": "SessionModeEnum",
               "modelAsString": false
             }
           }
@@ -1001,6 +1013,97 @@
           },
           "isPrivate": {
             "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "hasFreeTrials": {
+            "type": "boolean"
+          },
+          "isPricePerSeat": {
+            "type": "boolean"
+          },
+          "isStopSell": {
+            "type": "boolean"
+          },
+          "market": {
+            "type": "string"
+          },
+          "planComponents": {
+            "type": "object",
+            "properties": {
+              "recurrentBillingTerms": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RecurrentBillingTerm"
+                }
+              },
+              "meteringDimensions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MeteringDimension"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RecurrentBillingTerm": {
+        "type": "object",
+        "properties": {
+          "currency":{
+            "type": "string"
+          },
+          "price":{
+            "type": "number"
+          },
+          "termUnit":{
+            "type": "string",
+            "enum": ["P1M", "P1Y"],
+            "x-ms-enum": {
+              "name": "TermUnitEnum",
+              "modelAsString": false
+            }
+          },
+          "termDescription":{
+            "type": "string"
+          },
+          "meteredQuantityIncluded": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeteringedQuantityIncluded"
+            }
+          }
+        }
+      },
+      "MeteringedQuantityIncluded":{
+        "type": "object",
+        "properties": {
+          "dimensionId":{
+            "type": "string"
+          },
+          "units":{
+            "type": "string"
+          }
+        }
+      },
+      "MeteringDimension": {
+        "type": "object",
+        "properties": {
+          "id":{
+            "type": "string"
+          },
+          "currency":{
+            "type": "string"
+          },
+          "pricePerUnit":{
+            "type": "number"
+          },
+          "unitOfMeasure":{
+            "type": "string"
+          },
+          "displayName":{
+            "type": "string"
           }
         }
       },
