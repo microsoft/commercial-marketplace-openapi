@@ -328,8 +328,8 @@
                 "type": "string"
               },
               "quantity": {
-                "type": "integer",
-                "format": "int64"
+                "description": "Number of units consumed",
+                "type": "number"
               },
               "dimension": {
                 "description": "Dimension identifier",
