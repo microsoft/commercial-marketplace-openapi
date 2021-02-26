@@ -266,8 +266,7 @@
           },
           "quantity": {
             "description": "Number of units consumed",
-            "type": "integer",
-            "format": "int64"
+            "type": "number"
           },
           "dimension": {
             "type": "string",
