@@ -84,16 +84,20 @@
             }
           },
           "400": {
-            "description": "Bad request. x-ms-marketplace-token is missing, malformed, or expired."
+            "description": "Bad request. x-ms-marketplace-token is missing, malformed, or expired.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -161,10 +165,12 @@
             }
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -229,13 +235,16 @@
             }
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       },
@@ -310,16 +319,20 @@
             }
           },
           "400": {
-            "description": "Bad request. Validation failures."
+            "description": "Bad request. Validation failures.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       },
@@ -384,16 +397,20 @@
             }
           },
           "400": {
-            "description": "Delete on a subscription with Delete not in allowedCustomerOperations."
+            "description": "Delete on a subscription with Delete not in allowedCustomerOperations.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -458,13 +475,16 @@
             }
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -532,16 +552,20 @@
             "description": "Activates the subscription."
           },
           "400": {
-            "description": "Bad request. Validation failures."
+            "description": "Bad request. Validation failures.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -606,16 +630,20 @@
             }
           },
           "400": {
-            "description": "Bad request; validation failures."
+            "description": "Bad request; validation failures.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -689,16 +717,20 @@
             }
           },
           "400": {
-            "description": "Bad request; validation failures."
+            "description": "Bad request; validation failures.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       },
@@ -773,19 +805,24 @@
             "description": "A call to inform of completion of an operation on the partner side. For example, this response could signal the change of seats or plans."
           },
           "400": {
-            "description": "Bad request; validation failures."
+            "description": "Bad request; validation failures.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher."
+            "description": "Unauthorized. The authentication token was not provided or is invalid, or the request is attempting to access an acquisition that does not belong to the current publisher.",
+            "x-ms-error-response": true
           },
           "404": {
-            "description": "Not found."
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "409": {
-            "description": "Conflict. For example, a newer transaction is already fulfilled."
+            "description": "Conflict. For example, a newer transaction is already fulfilled.",
+            "x-ms-error-response": true
           },
           "500": {
-            "description": "Internal server error."
+            "description": "Internal server error.",
+            "x-ms-error-response": true
           }
         }
       }
