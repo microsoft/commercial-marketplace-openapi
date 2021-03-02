@@ -198,8 +198,7 @@
             "description": "Resource URI for the managed app. Used with managed applications. Only use resourceUri or resourceId, but never both."
           },
           "quantity": {
-            "type": "integer",
-            "format": "int64",
+            "type": "number",
             "description": "Number of units consumed"
           },
           "dimension": {
@@ -265,8 +264,8 @@
             "type": "string"
           },
           "quantity": {
-            "description": "Number of units consumed",
-            "type": "number"
+            "type": "number",
+            "description": "Number of units consumed"            
           },
           "dimension": {
             "type": "string",
@@ -323,8 +322,8 @@
                 "type": "string"
               },
               "quantity": {
-                "type": "integer",
-                "format": "int64"
+                "type": "number",
+                "description": "Number of units consumed"
               },
               "dimension": {
                 "description": "Dimension identifier",
