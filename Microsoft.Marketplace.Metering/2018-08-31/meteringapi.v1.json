@@ -85,13 +85,16 @@
             }
           },
           "400": {
-            "description": "Bad request, missing or invalid data provided or expired."
+            "description": "Bad request, missing or invalid data provided or expired.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "User is unauthorized to make this call."
+            "description": "User is unauthorized to make this call.",
+            "x-ms-error-response": true
           },
           "409": {
-            "description": "Conflict, when we receive the usage call for the usage resource ID, and effective usage, which already exists. The response will contain additionalInfo field that contains info about the accepted message."
+            "description": "Conflict, when we receive the usage call for the usage resource ID, and effective usage, which already exists. The response will contain additionalInfo field that contains info about the accepted message.",
+            "x-ms-error-response": true
           }
         }
       }
@@ -157,10 +160,12 @@
             }
           },
           "400": {
-            "description": "Bad request, missing or invalid data provided or expired."
+            "description": "Bad request, missing or invalid data provided or expired.",
+            "x-ms-error-response": true
           },
           "403": {
-            "description": "User is unauthorized to make this call."
+            "description": "User is unauthorized to make this call.",
+            "x-ms-error-response": true
           }
         }
       }
