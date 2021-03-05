@@ -19,17 +19,20 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
-
   "paths": {
     "/usageEvent": {
       "post": {
         "summary": "Posts a single usage event to the marketplace metering service API.",
         "description": "Posts a single usage event to the marketplace metering service API.",
         "operationId": "MeteringOperations_PostUsageEvent",
-        "tags": ["MarketplaceMeter"],
+        "tags": [
+          "MarketplaceMeter"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -86,6 +89,13 @@
           },
           "400": {
             "description": "Bad request, missing or invalid data provided or expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageEventBadRequestResponse"
+                }
+              }
+            },
             "x-ms-error-response": true
           },
           "403": {
@@ -94,6 +104,13 @@
           },
           "409": {
             "description": "Conflict, when we receive the usage call for the usage resource ID, and effective usage, which already exists. The response will contain additionalInfo field that contains info about the accepted message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageEventConflictResponse"
+                }
+              }
+            },
             "x-ms-error-response": true
           }
         }
@@ -104,7 +121,9 @@
         "summary": "Posts a set of usage events to the marketplace metering service API.",
         "description": "The batch usage event API allows you to emit usage events for more than one purchased entity at once. The batch usage event request references the metering services dimension defined by the publisher when publishing the offer.",
         "operationId": "MeteringOperations_PostBatchUsageEvent",
-        "tags": ["MarketplaceMeter"],
+        "tags": [
+          "MarketplaceMeter"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -187,7 +206,10 @@
       "ApiVersion": {
         "type": "string",
         "description": "The request must send the following parameters as a URL Encoded form; grant_type - client_credentials; resource - 62d94f6c-d599-489b-a797-3e10e42fbe22; client_id - AAD Registered App Client ID; client_secret - AAD Registered App Client Secret",
-        "enum": ["2018-08-31", "2018-09-15"],
+        "enum": [
+          "2018-08-31",
+          "2018-09-15"
+        ],
         "default": "2018-08-31"
       },
       "UsageEvent": {
@@ -223,14 +245,19 @@
         }
       },
       "BatchUsageEvent": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/UsageEvent"
-        },
-        "minItems": 1,
-        "maxItems": 25
+        "type": "object",
+        "properties": {
+          "request": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageEvent"
+            },
+            "minItems": 1,
+            "maxItems": 25
+          }
+        }
       },
-      "UsageEventOkResponse": {
+      "UsageEventResponse": {
         "type": "object",
         "properties": {
           "usageEventId": {
@@ -265,10 +292,6 @@
             "type": "string",
             "format": "uuid"
           },
-          "resourceUri": {
-            "description": "Identifier of the managed app resource against which usage is emitted",
-            "type": "string"
-          },
           "quantity": {
             "description": "Number of units consumed",
             "type": "number",
@@ -289,11 +312,8 @@
           }
         }
       },
-      "BatchUsageEventOkResponse": {        
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/UsageEventOkResponse"
-        }
+      "UsageEventOkResponse": {
+        "$ref": "#/components/schemas/UsageEventResponse"
       },
       "UsageEventConflictResponse": {
         "type": "object",
@@ -301,53 +321,11 @@
           "code": {
             "type": "string"
           },
+          "message": {
+            "type": "string"
+          },
           "additionalInfo": {
-            "type": "object",
-            "properties": {
-              "usageEventId": {
-                "description": "Unique identifier associated with the usage event",
-                "type": "string",
-                "format": "uuid"
-              },
-              "status": {
-                "description": "Accepted|NotProcessed|Expired",
-                "type": "string",
-                "enum": ["Accepted", "NotProcessed", "Expired"]
-              },
-              "messageTime": {
-                "description": "Time this message was created in UTC",
-                "type": "string",
-                "format": "date-time"
-              },
-              "resourceId": {
-                "description": "Identifier of the resource against which usage is emitted",
-                "type": "string",
-                "format": "uuid"
-              },
-              "resourceUri": {
-                "description": "Identifier of the managed app resource against which usage is emitted",
-                "type": "string"
-              },
-              "quantity": {
-                "description": "Number of units consumed",
-                "type": "number",
-                "format": "double"
-              },
-              "dimension": {
-                "description": "Dimension identifier",
-                "type": "string"
-              },
-              "effectiveStartTime": {
-                "description": "Time in UTC when the usage event occurred",
-                "type": "string",
-                "format": "date-time"
-              },
-              "planId": {
-                "description": "Plan associated with the purchased offer",
-                "type": "string",
-                "format": "uuid"
-              }
-            }
+            "$ref": "#/components/schemas/UsageEventResponse"
           }
         }
       },
@@ -382,6 +360,81 @@
           },
           "target": {
             "type": "string"
+          }
+        }
+      },
+      "BatchUsageEventResponse": {
+        "type": "object",
+        "properties": {
+          "usageEventId": {
+            "description": "Unique identifier associated with the usage event",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "description": "Status of the operation.",
+            "type": "string",
+            "enum": [
+              "Accepted",
+              "Expired",
+              "Duplicate",
+              "Error",
+              "ResourceNotFound",
+              "ResourceNotAuthorized",
+              "InvalidDimension",
+              "InvalidQuantity",
+              "BadArgument"
+            ],
+            "x-ms-enum": {
+              "name": "BatchUsageEventStatusEnum",
+              "modelAsString": false
+            }
+          },
+          "messageTime": {
+            "description": "Time this message was created in UTC",
+            "type": "string",
+            "format": "date-time"
+          },
+          "resourceId": {
+            "description": "Identifier of the resource against which usage is emitted",
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "description": "amount of emitted units as recorded by Microsoft ",
+            "type": "number",
+            "format": "double"
+          },
+          "dimension": {
+            "type": "string",
+            "description": "Dimension identifier"
+          },
+          "effectiveStartTime": {
+            "description": "Time in UTC when the usage event occurred",
+            "type": "string",
+            "format": "date-time"
+          },
+          "planId": {
+            "type": "string",
+            "description": "Plan associated with the purchased offer"
+          },
+          "error": {
+            "$ref": "#/components/schemas/UsageEventConflictResponse"
+          }
+        }
+      },
+      "BatchUsageEventOkResponse": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "description": "Number of records in the response",
+            "type": "number"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BatchUsageEventResponse"
+            }
           }
         }
       }
