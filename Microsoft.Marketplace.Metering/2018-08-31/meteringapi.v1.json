@@ -236,9 +236,6 @@
         }
       },
       "UsageEventOkResponse": {
-        "$ref": "#/components/schemas/UsageEventResponse"
-      },
-      "UsageEventResponse": {
         "type": "object",
         "properties": {
           "usageEventId": {
@@ -303,7 +300,7 @@
           "result":{
             "type":"array",
             "items":{
-              "$ref": "#/components/schemas/UsageEventResponse"
+              "$ref": "#/components/schemas/UsageEventOkResponse"
             }
           },
           "count":{
