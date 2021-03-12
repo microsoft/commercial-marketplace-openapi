@@ -993,10 +993,6 @@
             "type": "string",
             "format": "date-time"
           },
-          "lastModified": {
-            "type": "string",
-            "format": "date-time"
-          },
           "sessionMode": {
             "type": "string",
             "description": "Dry Run indicates all transactions run as Test-Mode in the commerce stack",
