@@ -79,14 +79,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsageEventOkResponse"
+                  "$ref": "#/components/schemas/UsageEventOKMessage"
                 }
               }
             }
           },
           "400": {
             "description": "Bad request, missing or invalid data provided or expired.",
-            "x-ms-error-response": true
+            "x-ms-error-response": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageEventBadRequestResponse"
+                }
+              }
+            }
           },
           "403": {
             "description": "User is unauthorized to make this call.",
@@ -94,7 +101,14 @@
           },
           "409": {
             "description": "Conflict, when we receive the usage call for the usage resource ID, and effective usage, which already exists. The response will contain additionalInfo field that contains info about the accepted message.",
-            "x-ms-error-response": true
+            "x-ms-error-response": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageEventConflictResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -160,7 +174,7 @@
             }
           },
           "400": {
-            "description": "Bad request, missing or invalid data provided or expired.",
+            "description": "Bad request. The batch contained more than 25 usage events.",
             "x-ms-error-response": true
           },
           "403": {
@@ -226,7 +240,7 @@
         "type": "object",
         "properties": {
           "request": {
-            "type":"array",
+            "type": "array",
             "items": {
               "$ref": "#/components/schemas/UsageEvent"
             },
@@ -235,7 +249,7 @@
           }
         }
       },
-      "UsageEventOkResponse": {
+      "UsageEventOKMessage": {
         "type": "object",
         "properties": {
           "usageEventId": {
@@ -244,21 +258,7 @@
             "format": "uuid"
           },
           "status": {
-            "description": "Status of the operation.",
-            "type": "string",
-            "enum": [
-              "Accepted",
-              "Expired",
-              "Duplicate",
-              "Error",
-              "ResourceNotFound",
-              "ResourceNotAuthorized",
-              "InvalidDimension|BadArgument"
-            ],
-            "x-ms-enum": {
-              "name": "UsageEventStatusEnum",
-              "modelAsString": false
-            }
+            "$ref": "#/components/schemas/StatusEnum"            
           },
           "messageTime": {
             "description": "Time this message was created in UTC",
@@ -294,16 +294,33 @@
           }
         }
       },
+      "StatusEnum":{
+        "description": "Status of the operation.",
+        "type": "string",
+        "enum": [
+          "Accepted",
+          "Expired",
+          "Duplicate",
+          "Error",
+          "ResourceNotFound",
+          "ResourceNotAuthorized",
+          "InvalidDimension|BadArgument"
+        ],
+        "x-ms-enum": {
+          "name": "UsageEventStatusEnum",
+          "modelAsString": false
+        }
+      },
       "BatchUsageEventOkResponse": {
         "type": "object",
         "properties": {
-          "result":{
-            "type":"array",
-            "items":{
-              "$ref": "#/components/schemas/UsageEventOkResponse"
+          "result": {
+            "type": "array",
+            "items": {
+                  "$ref": "#/components/schemas/UsageBatchEventOkMessage"
             }
           },
-          "count":{
+          "count": {
             "type": "integer"
           }
         }
@@ -311,56 +328,68 @@
       "UsageEventConflictResponse": {
         "type": "object",
         "properties": {
-          "code": {
-            "type": "string"
-          },
           "additionalInfo": {
             "type": "object",
             "properties": {
-              "usageEventId": {
-                "description": "Unique identifier associated with the usage event",
-                "type": "string",
-                "format": "uuid"
-              },
-              "status": {
-                "description": "Accepted|NotProcessed|Expired",
-                "type": "string",
-                "enum": ["Accepted", "NotProcessed", "Expired"]
-              },
-              "messageTime": {
-                "description": "Time this message was created in UTC",
-                "type": "string",
-                "format": "date-time"
-              },
-              "resourceId": {
-                "description": "Identifier of the resource against which usage is emitted",
-                "type": "string",
-                "format": "uuid"
-              },
-              "resourceUri": {
-                "description": "Identifier of the managed app resource against which usage is emitted",
-                "type": "string"
-              },
-              "quantity": {
-                "description": "Number of units consumed",
-                "type": "number",
-                "format": "double"
-              },
-              "dimension": {
-                "description": "Dimension identifier",
-                "type": "string"
-              },
-              "effectiveStartTime": {
-                "description": "Time in UTC when the usage event occurred",
-                "type": "string",
-                "format": "date-time"
-              },
-              "planId": {
-                "description": "Plan associated with the purchased offer",
-                "type": "string",
-                "format": "uuid"
+              "acceptedMessage": {
+                "$ref": "#/components/schemas/UsageEventOKMessage"
               }
             }
+          },
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "UsageBatchEventOkMessage":{
+        "type": "object",
+        "properties": {
+          "usageEventId": {
+            "description": "Unique identifier associated with the usage event",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum"            
+          },
+          "messageTime": {
+            "description": "Time this message was created in UTC",
+            "type": "string",
+            "format": "date-time"
+          },
+          "resourceId": {
+            "description": "Identifier of the resource against which usage is emitted",
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceUri": {
+            "description": "Identifier of the managed app resource against which usage is emitted",
+            "type": "string"
+          },
+          "quantity": {
+            "description": "Number of units consumed",
+            "type": "number",
+            "format": "double"
+          },
+          "dimension": {
+            "type": "string",
+            "description": "Dimension identifier"
+          },
+          "effectiveStartTime": {
+            "description": "Time in UTC when the usage event occurred",
+            "type": "string",
+            "format": "date-time"
+          },
+          "planId": {
+            "type": "string",
+            "description": "Plan associated with the purchased offer"
+          },
+          "error": {
+            "type": "object",
+            "$ref": "#/components/schemas/UsageEventConflictResponse"
           }
         }
       },
