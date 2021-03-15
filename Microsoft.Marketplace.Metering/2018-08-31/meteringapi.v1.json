@@ -79,7 +79,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsageEventOKMessage"
+                  "$ref": "#/components/schemas/UsageEventOkResponse"
                 }
               }
             }
@@ -249,7 +249,7 @@
           }
         }
       },
-      "UsageEventOKMessage": {
+      "UsageEventOkResponse": {
         "type": "object",
         "properties": {
           "usageEventId": {
@@ -332,7 +332,7 @@
             "type": "object",
             "properties": {
               "acceptedMessage": {
-                "$ref": "#/components/schemas/UsageEventOKMessage"
+                "$ref": "#/components/schemas/UsageEventOkResponse"
               }
             }
           },
