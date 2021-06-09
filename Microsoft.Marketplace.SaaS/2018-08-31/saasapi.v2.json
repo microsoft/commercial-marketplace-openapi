@@ -943,6 +943,9 @@
               "endDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "termUnit": {
+                "type": "string"
               }
             }
           },
