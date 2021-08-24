@@ -19,7 +19,7 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "AADToken": ["user_impersonation"]
     }
   ],
 
@@ -187,7 +187,7 @@
   },
   "components": {
     "securitySchemes": {
-      "azure_auth": {
+      "AADToken": {
         "type": "oauth2",
         "description": "Azure Active Directory OAuth2 Flow",
         "flows": {
