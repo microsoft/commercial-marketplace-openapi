@@ -943,6 +943,14 @@
               "endDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "termUnit":{
+                "type": "string",
+                "enum": ["P1M", "P1Y"],
+                "x-ms-enum": {
+                  "name": "TermUnitEnum",
+                  "modelAsString": false
+                }
               }
             }
           },
