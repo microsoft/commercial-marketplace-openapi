@@ -1092,7 +1092,7 @@
           },
           "termUnit":{
             "type": "string",
-            "enum": ["P1M", "P1Y"],
+            "enum": ["P1M", "P1Y","P3Y"],
             "x-ms-enum": {
               "name": "TermUnitEnum",
               "modelAsString": false
