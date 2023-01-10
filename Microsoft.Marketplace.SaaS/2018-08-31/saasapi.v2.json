@@ -943,6 +943,9 @@
               "endDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "termUnit": {
+                $ref: "#/components/schemas/TermUnit"
               }
             }
           },
@@ -1081,6 +1084,14 @@
           }
         }
       },
+      "TermUnit": {
+        "type": "string",
+        "enum": ["P1M", "P1Y", "P2Y", "P3Y"],
+        "x-ms-enum": {
+          "name": "TermUnitEnum",
+          "modelAsString": false
+        }
+      },
       "RecurrentBillingTerm": {
         "type": "object",
         "properties": {
@@ -1091,12 +1102,7 @@
             "type": "number"
           },
           "termUnit":{
-            "type": "string",
-            "enum": ["P1M", "P1Y", "P2Y", "P3Y"],
-            "x-ms-enum": {
-              "name": "TermUnitEnum",
-              "modelAsString": false
-            }
+            $ref: "#/components/schema/TermUnit"
           },
           "termDescription":{
             "type": "string"
