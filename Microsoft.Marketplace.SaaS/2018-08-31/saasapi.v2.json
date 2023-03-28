@@ -945,7 +945,7 @@
                 "format": "date-time"
               },
               "termUnit": {
-                $ref: "#/components/schemas/TermUnit"
+                "$ref": "#/components/schemas/TermUnit"
               }
             }
           },
@@ -1102,7 +1102,7 @@
             "type": "number"
           },
           "termUnit":{
-            $ref: "#/components/schema/TermUnit"
+            "$ref": "#/components/schemas/TermUnit"
           },
           "termDescription":{
             "type": "string"
