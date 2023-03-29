@@ -844,7 +844,7 @@
       "ApiVersion": {
         "type": "string",
         "description": "The request must send the following parameters as a URL Encoded form; grant_type - client_credentials; resource - 20e940b3-4c77-4b0b-9a53-9e16a1b010a7; client_id - AAD Registered App Client ID; client_secret - AAD Registered App Client Secret",
-        "enum": ["2018-08-31"],
+        "enum": [ "2018-08-31" ],
         "default": "2018-08-31"
       },
       "ResolvedSubscription": {
@@ -936,6 +936,10 @@
           "term": {
             "type": "object",
             "properties": {
+              "termUnit": {
+                "type": "string",
+                "$ref": "#/components/schemas/TermUnit"
+              },
               "startDate": {
                 "type": "string",
                 "format": "date-time"
@@ -962,7 +966,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["Read", "Update", "Delete"],
+              "enum": [ "Read", "Update", "Delete" ],
               "x-ms-enum": {
                 "name": "AllowedCustomerOperationsEnum",
                 "modelAsString": false
@@ -983,7 +987,7 @@
           "sandboxType": {
             "type": "string",
             "description": "Possible Values are None, Csp (Csp sandbox purchase)",
-            "enum": ["None", "Csp"],
+            "enum": [ "None", "Csp" ],
             "x-ms-enum": {
               "name": "SandboxTypeEnum",
               "modelAsString": false
@@ -996,7 +1000,7 @@
           "sessionMode": {
             "type": "string",
             "description": "Dry Run indicates all transactions run as Test-Mode in the commerce stack",
-            "enum": ["None", "DryRun"],
+            "enum": [ "None", "DryRun" ],
             "x-ms-enum": {
               "name": "SessionModeEnum",
               "modelAsString": false
@@ -1084,21 +1088,17 @@
       "RecurrentBillingTerm": {
         "type": "object",
         "properties": {
-          "currency":{
+          "currency": {
             "type": "string"
           },
-          "price":{
+          "price": {
             "type": "number"
           },
-          "termUnit":{
+          "termUnit": {
             "type": "string",
-            "enum": ["P1M", "P1Y", "P2Y", "P3Y"],
-            "x-ms-enum": {
-              "name": "TermUnitEnum",
-              "modelAsString": false
-            }
+            "$ref": "#/components/schemas/TermUnit"
           },
-          "termDescription":{
+          "termDescription": {
             "type": "string"
           },
           "meteredQuantityIncluded": {
@@ -1109,13 +1109,21 @@
           }
         }
       },
-      "MeteringedQuantityIncluded":{
+      "TermUnit": {
+        "type": "string",
+        "enum": [ "P1M", "P1Y", "P2Y", "P3Y" ],
+        "x-ms-enum": {
+          "name": "TermUnitEnum",
+          "modelAsString": false
+        }
+      },
+      "MeteringedQuantityIncluded": {
         "type": "object",
         "properties": {
-          "dimensionId":{
+          "dimensionId": {
             "type": "string"
           },
-          "units":{
+          "units": {
             "type": "string"
           }
         }
@@ -1123,19 +1131,19 @@
       "MeteringDimension": {
         "type": "object",
         "properties": {
-          "id":{
+          "id": {
             "type": "string"
           },
-          "currency":{
+          "currency": {
             "type": "string"
           },
-          "pricePerUnit":{
+          "pricePerUnit": {
             "type": "number"
           },
-          "unitOfMeasure":{
+          "unitOfMeasure": {
             "type": "string"
           },
-          "displayName":{
+          "displayName": {
             "type": "string"
           }
         }
@@ -1180,7 +1188,7 @@
           },
           "status": {
             "type": "string",
-            "enum": ["Success", "Failure"],
+            "enum": [ "Success", "Failure" ],
             "x-ms-enum": {
               "name": "UpdateOperationStatusEnum",
               "modelAsString": false
