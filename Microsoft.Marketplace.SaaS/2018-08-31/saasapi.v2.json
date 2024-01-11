@@ -711,7 +711,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Operation"
+                  "$ref": "#/components/schemas/SaaSOperation"
                 }
               }
             }
@@ -1202,12 +1202,12 @@
           "operations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Operation"
+              "$ref": "#/components/schemas/SaaSOperation"
             }
           }
         }
       },
-      "Operation": {
+      "SaaSOperation": {
         "type": "object",
         "properties": {
           "id": {
