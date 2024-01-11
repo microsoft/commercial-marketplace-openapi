@@ -183,6 +183,127 @@
           }
         }
       }
+    },
+    "/usageEvents": {
+      "post": {
+        "summary": "List of usage events.",
+        "description": "You can call the usage events API to get the list of usage events.",
+        "operationId": "MeteringOperations_GetUsageEvent",
+        "tags": ["MarketplaceMeter"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "schema": {
+              "$ref": "#/components/schemas/ApiVersion"
+            },
+            "required": true,
+            "description": "Version of the API."
+          },
+          {
+            "in": "query",
+            "name": "usageStartDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },            
+            "required": true,
+            "description": "DateTime in ISO8601 format. For example, 2020-12-03T15:00 or 2020-12-03."
+          },
+          {
+            "in": "query",
+            "name": "UsageEndDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "DateTime in ISO8601 format. Default = current date."
+          },
+          {
+            "in": "query",
+            "name": "offerId",
+            "schema": {
+              "type": "string"
+            },
+            "description": "OfferId."
+          },
+          {
+            "in": "query",
+            "name": "planId",
+            "schema": {
+              "type": "string"
+            },
+            "description": "PlanId."
+          },
+          {
+            "in": "query",
+            "name": "dimension",
+            "schema": {
+              "type": "string"
+            },
+            "description": "DimensionId."
+          },
+          {
+            "in": "query",
+            "name": "azureSubscriptionId",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Azure Subscription Id."
+          },
+          {
+            "in": "query",
+            "name": "reconStatus",
+            "schema": {
+              "$ref": "#/components/schemas/ReconStatus"
+            },
+            "description": "Recon Status."
+          },
+          {
+            "in": "header",
+            "name": "x-ms-requestid",
+            "x-ms-client-name": "requestId",
+            "description": "A unique string value for tracking the request from the client, preferably a GUID. If this value isn't provided, one will be generated and provided in the response headers.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": false
+          },
+          {
+            "in": "header",
+            "name": "x-ms-correlationid",
+            "x-ms-client-name": "correlationId",
+            "description": "A unique string value for operation on the client. This parameter correlates all events from client operation with events on the server side. If this value isn't provided, one will be generated and provided in the response headers.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsageEventOkResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, missing or invalid data provided or expired.",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "The authorization token isn't provided, is invalid or expired. Or the request is attempting to access a subscription for an offer that was published with a different Microsoft Entra App ID from the one used to create the authorization token.",
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "components": {
@@ -294,6 +415,80 @@
           }
         }
       },
+      "GetUsageEventOkResponse": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetUsageEvent"
+            }
+          }
+        }
+      },
+      "GetUsageEvent": {
+        "type": "object",
+        "properties": {
+          "usageDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time in UTC when the usage event occurred"
+          },
+          "usageResourceId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Identifier of the resource against which usage is emitted"          
+          },
+          "dimension": {
+            "type": "string",
+            "description": "Dimension"
+          },
+          "planId": {
+            "type": "string",
+            "description": "PlanId"
+          },
+          "planName": {
+            "type": "string",
+            "description": "PlanName"
+          },
+          "offerId": {
+            "type": "string",
+            "description": "OfferId"
+          },
+          "offerName": {
+            "type": "string",
+            "description": "OfferName"
+          },
+          "offerType": {
+            "type": "string",
+            "description": "OfferType"
+          },
+          "azureSubscriptionId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Azure Subscription Id"
+          },
+          "reconStatus": {
+            "$ref": "#/components/schemas/ReconStatus",
+            "description": "Recon Status"
+          },
+          "submittedQuantity": {
+            "type": "number",
+            "format": "double",
+            "description": "Submitted Quantity"
+          },
+          "processedQuantity": {
+            "type": "number",
+            "format": "double",
+            "description": "Processed Quantity"
+          },
+          "submittedCount": {
+            "type": "number",
+            "format": "double",
+            "description": "Submitted count"
+          }
+        }
+      },
       "StatusEnum":{
         "description": "Status of the operation.",
         "type": "string",
@@ -304,12 +499,27 @@
           "Error",
           "ResourceNotFound",
           "ResourceNotAuthorized",
+          "ResourceNotActive",
           "InvalidDimension",
           "InvalidQuantity",
           "BadArgument"
         ],
         "x-ms-enum": {
           "name": "UsageEventStatusEnum",
+          "modelAsString": false
+        }
+      },
+      "ReconStatus":{
+        "description": "Reconcilliation status of the submitted meter.",
+        "type": "string",
+        "enum": [
+          "Submitted",
+          "Accepted",
+          "Rejected",
+          "Mismatch"
+        ],
+        "x-ms-enum": {
+          "name": "ReconStatusEnum",
           "modelAsString": false
         }
       },
