@@ -711,7 +711,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Operation"
+                  "$ref": "#/components/schemas/SaaSOperation"
                 }
               }
             }
@@ -802,7 +802,7 @@
         },
         "responses": {
           "200": {
-            "description": "A call to inform of completion of an operation on the partner side. For example, this response could signal the change of seats or plans."
+            "description": "A call to inform of completion of an operation on the partner side. For example, this response could signal the completion of change of seats or plans."
           },
           "400": {
             "description": "Bad request; validation failures.",
@@ -817,7 +817,7 @@
             "x-ms-error-response": true
           },
           "409": {
-            "description": "Conflict. For example, a newer transaction is already fulfilled.",
+            "description": "Conflict. For example, a newer update is already fulfilled.",
             "x-ms-error-response": true
           },
           "500": {
@@ -973,17 +973,6 @@
               }
             }
           },
-          "sessionId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "fulfillmentId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "storeFront": {
-            "type": "string"
-          },
           "sandboxType": {
             "type": "string",
             "description": "Possible Values are None, Csp (Csp sandbox purchase)",
@@ -1054,6 +1043,14 @@
           "description": {
             "type": "string"
           },
+          "minQuantity": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "maxQuantity": {
+            "type": "integer",
+            "format": "int64"
+          },
           "hasFreeTrials": {
             "type": "boolean"
           },
@@ -1082,8 +1079,18 @@
                 }
               }
             }
+          },
+          "sourceOffers" : {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceOffer"
+            }
           }
         }
+      },
+      "SourceOffer" :{
+        "type":"string",
+        "format": "uuid"
       },
       "RecurrentBillingTerm": {
         "type": "object",
@@ -1202,12 +1209,12 @@
           "operations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Operation"
+              "$ref": "#/components/schemas/SaaSOperation"
             }
           }
         }
       },
-      "Operation": {
+      "SaaSOperation": {
         "type": "object",
         "properties": {
           "id": {
