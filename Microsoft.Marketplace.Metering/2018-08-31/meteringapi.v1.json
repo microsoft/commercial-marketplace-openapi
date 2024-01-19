@@ -185,7 +185,7 @@
       }
     },
     "/usageEvents": {
-      "post": {
+      "get": {
         "summary": "List of usage events.",
         "description": "You can call the usage events API to get the list of usage events.",
         "operationId": "MeteringOperations_GetUsageEvent",
@@ -416,14 +416,9 @@
         }
       },
       "GetUsageEventOkResponse": {
-        "type": "object",
-        "properties": {
-          "request": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GetUsageEvent"
-            }
-          }
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/GetUsageEvent"
         }
       },
       "GetUsageEvent": {
