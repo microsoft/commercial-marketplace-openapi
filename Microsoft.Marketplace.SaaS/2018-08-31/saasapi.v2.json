@@ -441,6 +441,15 @@
             "description": "Version of the API."
           },
           {
+            "in": "query",
+            "name": "planId",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "planid"
+          },
+          {
             "in": "header",
             "name": "x-ms-requestid",
             "x-ms-client-name": "requestId",
