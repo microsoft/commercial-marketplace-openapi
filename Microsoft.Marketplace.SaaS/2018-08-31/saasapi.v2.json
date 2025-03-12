@@ -956,6 +956,9 @@
               "endDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "chargeDuration": {
+                "type": "string"
               }
             }
           },
