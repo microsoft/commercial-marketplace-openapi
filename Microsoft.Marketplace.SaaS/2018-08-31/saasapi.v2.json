@@ -1095,13 +1095,19 @@
           "sourceOffers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/externalId"
+              "$ref": "#/components/schemas/SourceOffer"
             }
           }
         }
       },
-      "externalId": {
-        "type": "string"
+      "SourceOffer": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
       },
       "RecurrentBillingTerm": {
         "type": "object",
