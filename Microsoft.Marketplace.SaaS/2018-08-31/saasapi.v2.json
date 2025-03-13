@@ -1092,17 +1092,16 @@
               }
             }
           },
-          "sourceOffers" : {
+          "sourceOffers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SourceOffer"
+              "$ref": "#/components/schemas/externalId"
             }
           }
         }
       },
-      "SourceOffer" :{
-        "type":"string",
-        "format": "uuid"
+      "externalId": {
+        "type": "string"
       },
       "RecurrentBillingTerm": {
         "type": "object",
