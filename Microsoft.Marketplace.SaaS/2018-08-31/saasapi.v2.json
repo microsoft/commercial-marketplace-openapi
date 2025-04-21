@@ -441,6 +441,15 @@
             "description": "Version of the API."
           },
           {
+            "in": "query",
+            "name": "planId",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "planid"
+          },
+          {
             "in": "header",
             "name": "x-ms-requestid",
             "x-ms-client-name": "requestId",
@@ -947,6 +956,9 @@
               "endDate": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "chargeDuration": {
+                "type": "string"
               }
             }
           },
@@ -1080,7 +1092,7 @@
               }
             }
           },
-          "sourceOffers" : {
+          "sourceOffers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SourceOffer"
@@ -1088,9 +1100,14 @@
           }
         }
       },
-      "SourceOffer" :{
-        "type":"string",
-        "format": "uuid"
+      "SourceOffer": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
       },
       "RecurrentBillingTerm": {
         "type": "object",
