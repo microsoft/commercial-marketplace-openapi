@@ -1135,7 +1135,7 @@
       },
       "TermUnit": {
         "type": "string",
-        "enum": [ "P1M", "P1Y", "P2Y", "P3Y" ],
+        "enum": [ "P1M", "P1Y", "P2Y", "P3Y", "P4Y", "P5Y" ],
         "x-ms-enum": {
           "name": "TermUnitEnum",
           "modelAsString": false
